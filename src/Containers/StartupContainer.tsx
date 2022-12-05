@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useTheme } from '@/Hooks'
 import { Brand } from '@/Components'
 import { navigateAndSimpleReset } from '@/Navigators/utils'
-import route from '@/Utils/Constants/routes'
+import route from '@/Utils/constants/routes'
 
 const StartupContainer = () => {
   const { Layout, Gutters, Fonts } = useTheme()
