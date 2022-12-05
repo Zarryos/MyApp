@@ -5,5 +5,8 @@ export default {
       empty: 'No messages yet, write something!',
       error: 'An unknown error occured',
     },
+    messageComposer: {
+      send: 'Send',
+    },
   },
 }
