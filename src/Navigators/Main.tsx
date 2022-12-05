@@ -1,22 +1,20 @@
 import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createStackNavigator } from '@react-navigation/stack'
 import { Chat } from '@/Containers'
 
-const Tab = createBottomTabNavigator()
+const Stack = createStackNavigator()
 
-// @refresh reset
 const MainNavigator = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen
+    <Stack.Navigator>
+      <Stack.Screen
         name="Home"
         component={Chat}
         options={{
-          tabBarIconStyle: { display: 'none' },
-          tabBarLabelPosition: 'beside-icon',
+          headerShown: false,
         }}
       />
-    </Tab.Navigator>
+    </Stack.Navigator>
   )
 }
 
