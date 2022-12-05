@@ -9,7 +9,8 @@ import { useTheme } from '@/Hooks'
 const Placeholder = (props: { text: String }) => {
   const { Layout, Fonts } = useTheme()
 
-  // TODO: Do a nice placeholder, use an svg from undraw.co (or other)
+  // TODO: Do a nicer placeholder, use an svg from undraw.co (or other)
+  // TODO: Add an action prop, that display a button and trigger the action onPress (ex usecase: reload the chat in case of error)
   return (
     <View style={Layout.center}>
       <Text style={Fonts.textRegular}>{props.text}</Text>
