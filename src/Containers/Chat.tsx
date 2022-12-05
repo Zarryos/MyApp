@@ -1,43 +1,59 @@
-import React, { useState, useEffect } from 'react'
-import {
-  View,
-  ActivityIndicator,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-  SafeAreaView,
-} from 'react-native'
-import { useTranslation } from 'react-i18next'
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
+import { ActivityIndicator, FlatList, SafeAreaView } from 'react-native'
 import { useTheme } from '@/Hooks'
-import { useLazyFetchOneQuery } from '@/Services/modules/users'
 import Message from '@/Types/chat/Message'
 import MessageRow from '@/Components/molecules/chat/MessageRow'
-
-// TODO: Move fake data
-const DATA: [Message] = [
-  { id: 0, author: { id: 0, name: 'Bot' }, content: 'Hello I am a bot' },
-]
+import { getChatMessages } from '@/Services/modules/chat/chat'
+import { useTranslation } from 'react-i18next'
+import Placeholder from '@/Components/molecules/Placeholder'
 
 const Chat = () => {
   const { t } = useTranslation()
-  const { Common, Fonts, Gutters, Layout } = useTheme()
+  const { Gutters, Layout } = useTheme()
 
-  // TODO: Fetch initial fake data
-  const [fetchOne, { data, isSuccess, isLoading, isFetching, error }] =
-    useLazyFetchOneQuery()
+  const [messages, setMessages] = useState<Array<Message> | null>()
+  const [error, setError] = useState<Boolean>(false) // TODO: Set back to false after testing
+
+  const fetchMessages = useCallback(async () => {
+    await getChatMessages()
+      .then(r => setMessages(r))
+      .catch(e => setError(e))
+  }, [])
+
+  // Initial messages loading effect
+  useEffect(() => {
+    fetchMessages()
+  }, [fetchMessages])
 
   // Chat message renderer
   const renderItem = (message: Message) => <MessageRow message={message} />
 
+  const renderPlaceholder = useMemo(() => {
+    let text = t('chat.placeholder.empty')
+
+    if (error) {
+      text = t('chat.placeholder.error')
+    }
+
+    // TODO: Do a nice plaholder, use an svg from undraw.co (or other)
+    return <Placeholder text={text} />
+  }, [error, t])
+
   return (
-    <SafeAreaView>
-      <FlatList
-        data={DATA}
-        renderItem={({ item }) => renderItem(item)}
-        keyExtractor={(item: Message) => item.id.toString()}
-      />
+    <SafeAreaView
+      style={[Layout.fill, Gutters.largeVPadding, Gutters.largeHPadding]}
+    >
+      {messages || error ? (
+        <FlatList
+          data={messages}
+          renderItem={({ item }) => renderItem(item)}
+          keyExtractor={(item: Message) => item.id.toString()}
+          ListEmptyComponent={renderPlaceholder}
+          inverted={!error}
+        />
+      ) : (
+        <ActivityIndicator size={'large'} style={[Gutters.largeVMargin]} />
+      )}
     </SafeAreaView>
   )
 }
