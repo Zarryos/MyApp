@@ -11,3 +11,16 @@ export async function getChatMessages() {
 
   return FakeMessages
 }
+
+export async function createChatMessage(text: String) {
+  // TODO: Connect the API
+  // Creating a message... (not really)
+  await new Promise(resolve =>
+    setTimeout(() => {
+      resolve(true)
+    }, 500),
+  )
+
+  // Simulate a success
+  return !!text
+}
