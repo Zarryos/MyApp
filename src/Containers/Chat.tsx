@@ -7,6 +7,9 @@ import { getChatMessages } from '@/Services/modules/chat/chat'
 import { useTranslation } from 'react-i18next'
 import Placeholder from '@/Components/molecules/Placeholder'
 
+/**
+ * Render a list of message (or a placeholder) and a text input
+ */
 const Chat = () => {
   const { t } = useTranslation()
   const { Gutters, Layout } = useTheme()
@@ -25,9 +28,14 @@ const Chat = () => {
     fetchMessages()
   }, [fetchMessages])
 
-  // Chat message renderer
+  /**
+   * Chat message renderer
+   */
   const renderItem = (message: Message) => <MessageRow message={message} />
 
+  /**
+   * Placeholder renderer, depending on the error state
+   */
   const renderPlaceholder = useMemo(() => {
     let text = t('chat.placeholder.empty')
 
