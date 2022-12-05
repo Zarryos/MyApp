@@ -43,7 +43,6 @@ const Chat = () => {
       text = t('chat.placeholder.error')
     }
 
-    // TODO: Do a nice plaholder, use an svg from undraw.co (or other)
     return <Placeholder text={text} />
   }, [error, t])
 
