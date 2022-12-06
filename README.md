@@ -33,6 +33,9 @@ Well, let's say a lot can be done there. Display the messages in a bubble, diffe
 ### Features
 All the classic chat features are to be added: Like a message, quote, edit, delete, add an image/gif, audio recording, received indicator...
 
+### Tests
+Having a more advanced project would justify testing some methods and add some validation on messages that could be tested
+
 ## Time spent
 The repartition of time used to make this project is the following : 
 - [x] 1.5 hour initial setup, update of dependencies and project versionning
