@@ -34,6 +34,7 @@ export async function createChatMessage(text: String) {
   // TODO: Use the mapper on the api response (and write the mapper oc!)
   const createdMessage: Message = {
     id: generateMessageId(),
+    dateString: new Date().toLocaleDateString('en-US'),
     content: text,
     author: myFakeUser,
   }
