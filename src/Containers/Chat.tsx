@@ -12,6 +12,7 @@ import Placeholder from '@/Components/molecules/Placeholder'
 import MessageComposer from '@/Components/molecules/chat/MessageComposer'
 import { useSelector } from 'react-redux'
 import { RootStateOrAny } from 'react-redux'
+import { generateChatMessageAsContact } from '@/Utils/fakeData/message'
 
 /**
  * Render a list of message (or a placeholder) and a text input
@@ -31,7 +32,14 @@ const Chat = () => {
   }, [])
 
   const sendMessage = useCallback(async (text: String) => {
-    await createChatMessage(text).then((success: Boolean) => setError(!success))
+    await createChatMessage(text).then((success: Boolean) => {
+      if (success) {
+        // Success! But we're alone here...
+        // Let's generate a response!
+        generateChatMessageAsContact()
+      }
+      setError(!success)
+    })
   }, [])
 
   // Initial messages loading effect
@@ -66,6 +74,7 @@ const Chat = () => {
           keyExtractor={(item: Message) => item.id.toString()}
           ListEmptyComponent={renderPlaceholder}
           style={[Gutters.regularVPadding, Gutters.regularHPadding]}
+          showsVerticalScrollIndicator={false}
           inverted={!error}
         />
       ) : (
