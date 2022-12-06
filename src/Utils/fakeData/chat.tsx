@@ -1,6 +1,11 @@
 import Message from '@/Types/chat/Message'
+import { contactFakeUser } from './user'
 
-//TODO: Use API
-export const FakeMessages: [Message] = [
-  { id: 0, author: { id: 0, name: 'Bot' }, content: 'Hello I am a bot' },
+// A starter fake message list
+export const fakeMessages: [Message] = [
+  {
+    id: 0,
+    author: contactFakeUser,
+    content: "You should've gone for the head ;)",
+  },
 ]
