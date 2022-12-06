@@ -22,7 +22,7 @@ const chat = (
       }
     case ADD_MESSAGES:
       // TODO: With a real back-end and realtime message stream, we could use an UPDATE_MESSAGE instead
-      // Storing the messages by their ids would be great to ensure there is no duplicate messages, for example
+      // Storing the messages by their ids would be an option to ensure there is no duplicate messages, for example
       return {
         ...state,
         messages: action.messages.concat(state.messages),

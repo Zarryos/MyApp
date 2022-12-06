@@ -5,6 +5,10 @@ import { fakeMessages } from '@/Utils/fakeData/chat'
 import { generateMessageId } from '@/Utils/fakeData/message'
 import { myFakeUser } from '@/Utils/fakeData/user'
 
+/**
+ * Get all chat messages and dispatch them to the store
+ * @returns Success, true or false
+ */
 export async function getChatMessages() {
   // TODO: Connect the API
   // Fetching the messages... (not really)
@@ -22,6 +26,10 @@ export async function getChatMessages() {
   return true
 }
 
+/**
+ * Create a chat message and dispatch it to the store
+ * @returns Success, true or false
+ */
 export async function createChatMessage(text: String) {
   // TODO: Connect the API
   // Creating a message... (not really)
