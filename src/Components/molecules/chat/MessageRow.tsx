@@ -20,10 +20,22 @@ const MessageRow = (props: { message: Message }) => {
 
   return (
     <View style={isMyMessage ? Layout.alignItemsEnd : Layout.alignItemsStart}>
-      <Text style={[Fonts.textRegular, Gutters.smallVMargin]}>
+      <Text style={[Fonts.textExtraSmall, Gutters.smallVMargin]}>
         {props.message.author.name}
       </Text>
-      <Text style={Fonts.textSmall}>{props.message.content}</Text>
+      <View style={Layout.row}>
+        {!isMyMessage && (
+          <Text style={[Fonts.textExtraSmall, Gutters.smallRMargin]}>
+            {props.message.dateString}
+          </Text>
+        )}
+        <Text style={Fonts.textSmall}>{props.message.content}</Text>
+        {isMyMessage && (
+          <Text style={[Fonts.textExtraSmall, Gutters.smallLMargin]}>
+            {props.message.dateString}
+          </Text>
+        )}
+      </View>
     </View>
   )
 }
