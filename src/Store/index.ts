@@ -14,10 +14,12 @@ import {
 
 import { api } from '@/Services/api'
 import theme from './Theme'
+import chat from './Redux/reducers/message'
 
 const reducers = combineReducers({
   theme,
   api: api.reducer,
+  chat,
 })
 
 const persistConfig = {
