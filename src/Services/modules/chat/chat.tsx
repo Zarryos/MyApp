@@ -1,4 +1,9 @@
-import { FakeMessages } from '@/Utils/fakeData/chat'
+import { store } from '@/Store'
+import { addMessage, resetMessages } from '@/Store/Redux/actions/message'
+import Message from '@/Types/chat/Message'
+import { fakeMessages } from '@/Utils/fakeData/chat'
+import { generateMessageId } from '@/Utils/fakeData/message'
+import { myFakeUser } from '@/Utils/fakeData/user'
 
 export async function getChatMessages() {
   // TODO: Connect the API
@@ -9,7 +14,12 @@ export async function getChatMessages() {
     }, 500),
   )
 
-  return FakeMessages
+  // Success! Dispatch retreived messages in redux
+  store.dispatch(resetMessages(fakeMessages))
+
+  // TODO: Handle api error
+  // Simulate a success
+  return true
 }
 
 export async function createChatMessage(text: String) {
@@ -21,6 +31,17 @@ export async function createChatMessage(text: String) {
     }, 500),
   )
 
+  // TODO: Use the mapper on the api response (and write the mapper oc!)
+  const createdMessage: Message = {
+    id: generateMessageId(),
+    content: text,
+    author: myFakeUser,
+  }
+
+  // Success! Dispatch created message in redux
+  store.dispatch(addMessage(createdMessage))
+
+  // TODO: Handle api error
   // Simulate a success
-  return !!text
+  return true
 }
